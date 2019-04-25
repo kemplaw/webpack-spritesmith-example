@@ -1,0 +1,151 @@
+/*
+Stylus variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon_home_width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon_home = x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet = width height image $spritesheet_sprites;
+*/
+$_name = '企鹅号';
+$_x = 0px;
+$_y = 0px;
+$_offset_x = 0px;
+$_offset_y = 0px;
+$_width = 35px;
+$_height = 35px;
+$_total_width = 105px;
+$_total_height = 70px;
+$_image = 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png';
+$_ = 0px 0px 0px 0px 35px 35px 105px 70px 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png' '企鹅号';
+$_name = '大鱼号';
+$_x = 35px;
+$_y = 0px;
+$_offset_x = -35px;
+$_offset_y = 0px;
+$_width = 35px;
+$_height = 35px;
+$_total_width = 105px;
+$_total_height = 70px;
+$_image = 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png';
+$_ = 35px 0px -35px 0px 35px 35px 105px 70px 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png' '大鱼号';
+$_name = '快传';
+$_x = 0px;
+$_y = 35px;
+$_offset_x = 0px;
+$_offset_y = -35px;
+$_width = 35px;
+$_height = 35px;
+$_total_width = 105px;
+$_total_height = 70px;
+$_image = 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png';
+$_ = 0px 35px 0px -35px 35px 35px 105px 70px 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png' '快传';
+$_logo_name = '惠头条logo';
+$_logo_x = 35px;
+$_logo_y = 35px;
+$_logo_offset_x = -35px;
+$_logo_offset_y = -35px;
+$_logo_width = 35px;
+$_logo_height = 35px;
+$_logo_total_width = 105px;
+$_logo_total_height = 70px;
+$_logo_image = 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png';
+$_logo = 35px 35px -35px -35px 35px 35px 105px 70px 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png' '惠头条logo';
+$_name = '爱奇艺';
+$_x = 70px;
+$_y = 0px;
+$_offset_x = -70px;
+$_offset_y = 0px;
+$_width = 35px;
+$_height = 35px;
+$_total_width = 105px;
+$_total_height = 70px;
+$_image = 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png';
+$_ = 70px 0px -70px 0px 35px 35px 105px 70px 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png' '爱奇艺';
+$_name = '百家';
+$_x = 70px;
+$_y = 35px;
+$_offset_x = -70px;
+$_offset_y = -35px;
+$_width = 35px;
+$_height = 35px;
+$_total_width = 105px;
+$_total_height = 70px;
+$_image = 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png';
+$_ = 70px 35px -70px -35px 35px 35px 105px 70px 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png' '百家';
+$spritesheet_width = 105px;
+$spritesheet_height = 70px;
+$spritesheet_image = 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png';
+$spritesheet_sprites = $_ $_ $_ $_logo $_ $_;
+$spritesheet = 105px 70px 'D:\phpStudy\PHPTutorial\WWW\icon-demo\src\assets\icons\sprite.png' $spritesheet_sprites;
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  spriteWidth($icon_home)
+}
+
+.icon-email {
+  sprite($icon_email)
+}
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of Stylus
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+sprites($spritesheet_sprites);
+*/
+sprites($sprites) {
+  for $sprite in $sprites {
+    $sprite_name = $sprite[9];
+    .{$sprite_name} {
+      sprite($sprite);
+    }
+  }
+}
